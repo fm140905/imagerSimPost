@@ -1,1 +1,0 @@
-/usr/bin/g++-9  -g   CMakeFiles/readerTest.dir/test.cpp.o  -o readerTest  -Wl,-rpath,/media/ming/DATA/projects/Postprocessing/build/Sources ../lib/libgtest_maind.a ../Sources/libreader.so ../lib/libgtestd.a -lpthread 

@@ -78,17 +78,19 @@ private:
     /* data */
 public:
     ulong histNo=0; // history number
+    double timeStamp=0; // time stamp, ns
     double height=0; // pulse amplitude, MeV
-    ushort reaction=0; // reaction type, 1 or 3
+    // ushort reaction=0; // reaction type, 1 or 3
     int cellNo=0; // cell number
-    double ergIn=0; // energy of incoming photon, MeV
+    // double ergIn=0; // energy of incoming photon, MeV
     Pulse() {}
     Pulse(std::string record) {
-        histNo = std::stoi(record.substr(56, 8));
+        histNo = std::stoi(record.substr(54, 10));
+        timeStamp = std::stod(record.substr(14, 24));
         height = std::stod(record.substr(77, 9));
-        reaction = std::stoi(record.substr(88, 4));
+        // reaction = std::stoi(record.substr(88, 4));
         cellNo = std::stoi(record.substr(137, 9));
-        ergIn = std::stod(record.substr(161, 10));
+        // ergIn = std::stod(record.substr(161, 10));
     }
 };
 

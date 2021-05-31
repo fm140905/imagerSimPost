@@ -1,4 +1,5 @@
 add_library(reader SHARED reader.cpp)
 
-add_executable(postproc main.cpp)
-target_link_libraries(postproc PUBLIC reader)
+add_subdirectory(sortbyhist)
+add_subdirectory(findposition)
+add_subdirectory(sortbytime)

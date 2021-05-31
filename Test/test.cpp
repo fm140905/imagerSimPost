@@ -5,21 +5,24 @@
 
 TEST(PulseTest, constructor)
 {
-    std::string record("         13.               0.40000000      2.                 21.            0.737400      1.      1.   -999.           0.10000000E+01          35               0.66100001");
+    std::string record("         54.     99999979198.31918335      2.           85965777.            0.224839      1.      1.   -999.           0.10000000E+01         206               0.66100001");
     Pulse pulse(record);
-    EXPECT_EQ(pulse.histNo, 21);
-    EXPECT_DOUBLE_EQ(pulse.height, 0.737400);
-    EXPECT_EQ(pulse.reaction, 1);
-    EXPECT_EQ(pulse.cellNo, 35);
-    EXPECT_DOUBLE_EQ(pulse.ergIn, 0.66100001);
+    // EXPECT_EQ(pulse.histNo, 21);
+    EXPECT_DOUBLE_EQ(pulse.timeStamp, 99999979198.31918335);
+    EXPECT_DOUBLE_EQ(pulse.height, 0.224839);
+    // EXPECT_EQ(pulse.reaction, 1);
+    EXPECT_EQ(pulse.cellNo, 206);
+    // EXPECT_DOUBLE_EQ(pulse.ergIn, 0.66100001);
 
-    record =           "         22.               0.40000000      2.           89765585.            0.114611      3.      1.   -999.           0.10000000E+01          54               0.11270000";
+    record =           "         42.           26143.30947533      2.             101421.            0.472308      3.      1.   -999.           0.10000000E+01          94               0.02861000";
     pulse = Pulse(record);
-    EXPECT_EQ(pulse.histNo, 89765585);
-    EXPECT_DOUBLE_EQ(pulse.height, 0.114611);
-    EXPECT_EQ(pulse.reaction, 3);
-    EXPECT_EQ(pulse.cellNo, 54);
-    EXPECT_DOUBLE_EQ(pulse.ergIn, 0.11270000);
+    // EXPECT_EQ(pulse.histNo, 89765585);
+    EXPECT_DOUBLE_EQ(pulse.timeStamp, 26143.30947533);
+
+    EXPECT_DOUBLE_EQ(pulse.height, 0.472308);
+    // EXPECT_EQ(pulse.reaction, 3);
+    EXPECT_EQ(pulse.cellNo, 94);
+    // EXPECT_DOUBLE_EQ(pulse.ergIn, 0.02861000);
 }
 
 TEST(EventTest, constructor)

@@ -1,1 +1,0 @@
-/usr/bin/g++-9  -g   CMakeFiles/postproc.dir/main.cpp.o  -o postproc  -Wl,-rpath,/media/ming/DATA/projects/Postprocessing/build/Sources libreader.so 
