@@ -1,0 +1,2 @@
+add_executable(findCoincidences main.cpp)
+target_link_libraries(findCoincidences PUBLIC reader)

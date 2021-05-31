@@ -1,1 +1,2 @@
   apex.x  apex.y  apex.z  axis.x  axis.y  axis.z  cosHalfAngle       E1+E2           E1   history_number
+    2.69    4.23   -0.89   -0.40   -0.72   -0.40  -0.61881198   0.35480100   0.18775600          411
