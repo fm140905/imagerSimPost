@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="(empty)"
+	BuildStamp="20210531-1545-Experimental"
+	Name="(empty)"
+	Generator="ctest-3.16.3"
+	CompilerName=""
+	CompilerVersion=""
+	OSName="Linux"
+	Hostname="ming-precision-5820-tower-x-series"
+	OSRelease="5.4.0-73-generic"
+	OSVersion="#82-Ubuntu SMP Wed Apr 14 17:39:42 UTC 2021"
+	OSPlatform="x86_64"
+	Is64Bits="1"
+	VendorString="GenuineIntel"
+	VendorID="Intel Corporation"
+	FamilyID="6"
+	ModelID="85"
+	ProcessorCacheSize="16896"
+	NumberOfLogicalCPU="24"
+	NumberOfPhysicalCPU="12"
+	TotalVirtualMemory="975"
+	TotalPhysicalMemory="15714"
+	LogicalProcessorsPerPhysical="2"
+	ProcessorClockFrequency="1200.01"
+	>
+	<Testing>
+		<StartDateTime>May 31 10:45 CDT</StartDateTime>
+		<StartTestTime>1622475946</StartTestTime>
+		<TestList>
+			<Test>./Test/readerTest</Test>
+		</TestList>
+		<Test Status="passed">
+			<Name>readerTest</Name>
+			<Path>./Test</Path>
+			<FullName>./Test/readerTest</FullName>
+			<FullCommandLine>/media/ming/DATA/projects/Postprocessing/build/Test/readerTest</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.00848349</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/media/ming/DATA/projects/Postprocessing/build/Test/readerTest</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value encoding="base64" compression="gzip">eJyNkztvwjAQgPf8ihthwIE+xg6oVB0qtQjRLghVwTlCqtgX+UHbf187LmmApOGW+M7f2V+i3MJKmcsMRJLLwRC2igTEAtM8iYWrx7PpchqXij6QGx3PSRuXcNTab2ZEWYEGtWkuteJx5lfv/lDGebS6q2MNi98bb8EzOlwZEtA2d08WrUZ1rOGxoE1SBADlPlckBUoHoxnZ8gSeBK46dG4LjUuXRitYvD5DFeu/MuMktVGWG1IOCfHy1IXAYAxCDy+4L5BgyCTFMOpueNi79zgXrMvdgq1Ir2DddangPcmWD3ioduu1Eb12h6ZL5TI07n881/ursyOk4deK9Aqeov2Kb+jf/Hp2LtncYVSiSlyqjy3bmV7NZtt/otVcMcai5Q5BeZi2YNy6OoqsKa2Bz0S7PUF7TMHNPEfI3RR+ccRUB3jnWndUpL57Mr66gc13NcM/rHpaEA==</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<EndDateTime>May 31 10:45 CDT</EndDateTime>
+		<EndTestTime>1622475946</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

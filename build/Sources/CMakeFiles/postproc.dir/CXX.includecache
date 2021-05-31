@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../Header/reader.h
+sstream
+-
+string
+-
+vector
+-
+cmath
+-
+
+/media/ming/DATA/projects/Postprocessing/Sources/main.cpp
+iostream
+-
+fstream
+-
+vector
+-
+string
+-
+algorithm
+-
+iomanip
+-
+chrono
+-
+set
+-
+reader.h
+/media/ming/DATA/projects/Postprocessing/Sources/reader.h
+

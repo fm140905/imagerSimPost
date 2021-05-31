@@ -1,0 +1,1 @@
+/usr/bin/g++-9 -fPIC -g  -shared -Wl,-soname,libreader.so -o libreader.so CMakeFiles/reader.dir/reader.cpp.o 
