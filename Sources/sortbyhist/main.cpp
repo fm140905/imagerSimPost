@@ -49,5 +49,4 @@ int main(int argc, char** argv)
     auto endTime = std::chrono::high_resolution_clock::now();
     std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count() << "ms" << std::endl; 
     return 0;
-    return 0;
 }

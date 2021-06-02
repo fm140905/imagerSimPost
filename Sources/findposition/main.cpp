@@ -15,16 +15,13 @@ int main(int argc, char** argv)
     // std::string dumnFile("/media/ming/DATA/projects/Postprocessing/simulation_2/dumn1");
     // std::string pulseFile("/media/ming/DATA/projects/Postprocessing/simulation_2/pulses_sort_by_hist.txt");
     // std::string outpath("/media/ming/DATA/projects/Postprocessing/simulation_2/pulses_with_pos.txt");
+    std::string dumnFile("/media/ming/DATA/projects/Postprocessing/simulation_1/dumn1");
+    std::string pulseFile("/media/ming/DATA/projects/Postprocessing/simulation_1/imager_All_pulses.o");
+    std::string outpath("/media/ming/DATA/projects/Postprocessing/simulation_1/pulses_with_pos.txt");
     // test run
-    std::string dumnFile("/media/ming/DATA/projects/Postprocessing/Test/collision.txt");
-    std::string pulseFile("/media/ming/DATA/projects/Postprocessing/Test/pulses_sort_by_hist.txt");
-    std::string outpath("/media/ming/DATA/projects/Postprocessing/Test/pulses_with_pos.txt");
-    // std::set<int> channels = {13, 15, 17, 19, 21,
-    //                           53, 55, 57, 59, 61,
-    //                           73, 75, 77, 79, 81,
-    //                           93, 95, 97, 99, 101,
-    //                           303, 305, 307, 309, 311,
-    //                           503, 505, 507, 509, 511};
+    // std::string dumnFile("/media/ming/DATA/projects/Postprocessing/Test/collision.txt");
+    // std::string pulseFile("/media/ming/DATA/projects/Postprocessing/Test/pulses_sort_by_hist.txt");
+    // std::string outpath("/media/ming/DATA/projects/Postprocessing/Test/pulses_with_pos.txt");
 
     std::ifstream fdumn;
     fdumn.open(dumnFile, std::ios::in);
@@ -71,12 +68,12 @@ int main(int argc, char** argv)
                 continue;  
         }
         // else, process vector of pulses; 
-        // sort the pulses based on time stamp
-        std::sort(pulses.begin(), pulses.end(),
-                [](const std::pair<Pulse, std::string> & a, const std::pair<Pulse, std::string> & b) -> bool
-                { 
-                    return a.first.timeStamp < b.first.timeStamp; 
-                });
+        // // sort the pulses based on time stamp
+        // std::sort(pulses.begin(), pulses.end(),
+        //         [](const std::pair<Pulse, std::string> & a, const std::pair<Pulse, std::string> & b) -> bool
+        //         { 
+        //             return a.first.timeStamp < b.first.timeStamp; 
+        //         });
         // get position from collision file
         std::vector<Event> interactions;
         if (prevDumnLine.length() > 0)
