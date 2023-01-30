@@ -10,10 +10,14 @@
 
 int main(int argc, char** argv)
 {
-    // std::string pulseFile("/media/ming/DATA/projects/Postprocessing/simulation_2/imager_All_pulses.o");
-    // std::string outpath("/media/ming/DATA/projects/Postprocessing/simulation_2/pulses_sort_by_hist.txt");
-    std::string pulseFile("/media/ming/DATA/projects/Postprocessing/Test/pulses.txt");
-    std::string outpath("/media/ming/DATA/projects/Postprocessing/Test/pulses_sort_by_hist.txt");
+    std::string dir = argv[1];
+    std::string pulseFile("/imager_All_pulses.o");
+    std::string outpath("/pulses_sort_by_hist.txt");
+    pulseFile = dir + pulseFile;
+    outpath = dir + outpath;
+    // std::cout << pulseFile << std::endl;
+    // std::string pulseFile("/media/ming/DATA/projects/Postprocessing/Test/pulses.txt");
+    // std::string outpath("/media/ming/DATA/projects/Postprocessing/Test/pulses_sort_by_hist.txt");
 
     std::ifstream fpulse;
     fpulse.open(pulseFile, std::ios::in);

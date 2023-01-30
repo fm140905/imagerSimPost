@@ -103,6 +103,7 @@ public:
     int cellNo=0; // cell number
     double ergDpst=0; // energy of incoming photon, MeV
     Vector3D pos=Vector3D(0,0,0);
+    double timestamp; // in ns
     Event() {}
     Event(std::string record) {
         histNo = std::stoi(record.substr(0, 10));
@@ -112,6 +113,16 @@ public:
                        stod(record.substr(80,6)),
                        stod(record.substr(88,6)));
     }
+    Event(std::string record, const int type) {
+        histNo = std::stoi(record.substr(0, 10));
+        cellNo = std::stoi(record.substr(37, 6));
+        ergDpst = std::stod(record.substr(46, 8));
+        timestamp = std::stod(record.substr(56, 24))*10; // shake to ns
+        pos = Vector3D(stod(record.substr(83,6)),
+                       stod(record.substr(91,6)),
+                       stod(record.substr(99,6)));
+    }
 };
 
 Vector3D getPos(const std::vector<Event>& events, const int& cellNo);
+double getTimeStamp(const std::vector<Event>& events, const int& cellNo);

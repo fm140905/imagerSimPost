@@ -63,12 +63,14 @@ bool processCoincidence(std::vector<MyPulse>& pulses, Cone& newCone){
 int main(int argc, char** argv)
 {
     const int maxN = 10000;
-    std::string pulseFile("/media/ming/DATA/projects/Postprocessing/simulation_2/pulses_with_pos.txt");
-    std::string outpath("/media/ming/DATA/projects/Postprocessing/simulation_2/cones_ideal.txt");
+    // std::string pulseFile("/media/ming/DATA/projects/Postprocessing/simulation_2/pulses_with_pos.txt");
+    // std::string outpath("/media/ming/DATA/projects/Postprocessing/simulation_2/cones_ideal.txt");
     // std::string pulseFile("/media/ming/DATA/projects/Postprocessing/simulation_1/pulses_with_pos.txt");
     // std::string outpath("/media/ming/DATA/projects/Postprocessing/simulation_1/cones_ideal.txt");
     // std::string pulseFile("/media/ming/DATA/projects/Postprocessing/Test/pulses_with_pos.txt");
     // std::string outpath("/media/ming/DATA/projects/Postprocessing/Test/cones_ideal.txt");
+    std::string pulseFile("/media/ming/DATA/projects/Postprocessing/simulation_09132021/1/pulses_with_pos.txt");
+    std::string outpath("/media/ming/DATA/projects/Postprocessing/simulation_09132021/1/cones_ideal.txt");
 
     std::ifstream fpulse;
     fpulse.open(pulseFile, std::ios::in);

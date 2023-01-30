@@ -32,10 +32,13 @@ public:
 
 int main(int argc, char** argv)
 {
-    // std::string pulseFile("/media/ming/DATA/projects/Postprocessing/simulation_2/pulses_with_pos.txt");
-    // std::string outpath("/media/ming/DATA/projects/Postprocessing/simulation_2/pulses_with_pos_sort_by_time.txt");
-    std::string pulseFile("/media/ming/DATA/projects/Postprocessing/Test/pulses_with_pos.txt");
-    std::string outpath("/media/ming/DATA/projects/Postprocessing/Test/pulses_with_pos_sort_by_time.txt");
+    std::string dir = argv[1];
+    std::string pulseFile("/pulses_with_pos.txt");
+    std::string outpath("/pulses_with_pos_sort_by_time.txt");
+    pulseFile = dir + pulseFile;
+    outpath = dir + outpath;
+    // std::string pulseFile("/media/ming/DATA/projects/Postprocessing/Test/pulses_with_pos.txt");
+    // std::string outpath("/media/ming/DATA/projects/Postprocessing/Test/pulses_with_pos_sort_by_time.txt");
 
     std::ifstream fpulse;
     fpulse.open(pulseFile, std::ios::in);

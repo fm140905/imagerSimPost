@@ -11,13 +11,18 @@
 
 int main(int argc, char** argv)
 {
-    ulong maxN = 100000;
-    // std::string dumnFile("/media/ming/DATA/projects/Postprocessing/simulation_2/dumn1");
-    // std::string pulseFile("/media/ming/DATA/projects/Postprocessing/simulation_2/pulses_sort_by_hist.txt");
-    // std::string outpath("/media/ming/DATA/projects/Postprocessing/simulation_2/pulses_with_pos.txt");
-    std::string dumnFile("/media/ming/DATA/projects/Postprocessing/simulation_1/dumn1");
-    std::string pulseFile("/media/ming/DATA/projects/Postprocessing/simulation_1/imager_All_pulses.o");
-    std::string outpath("/media/ming/DATA/projects/Postprocessing/simulation_1/pulses_with_pos.txt");
+    std::string dir = argv[1];
+    ulong maxN = 100000000;
+    std::string dumnFile("/comptonImager0.d");
+    std::string pulseFile("/pulses_sort_by_hist.txt");
+    std::string outpath("/pulses_with_pos.txt");
+    // std::string pulseFile("/imager_All_pulses.o");
+    dumnFile = dir + dumnFile;
+    pulseFile = dir + pulseFile;
+    outpath = dir + outpath;
+    // std::string dumnFile("/media/ming/DATA/projects/Postprocessing/simulation_1/dumn1");
+    // std::string pulseFile("/media/ming/DATA/projects/Postprocessing/simulation_1/imager_All_pulses.o");
+    // std::string outpath("/media/ming/DATA/projects/Postprocessing/simulation_1/pulses_with_pos.txt");
     // test run
     // std::string dumnFile("/media/ming/DATA/projects/Postprocessing/Test/collision.txt");
     // std::string pulseFile("/media/ming/DATA/projects/Postprocessing/Test/pulses_sort_by_hist.txt");
@@ -81,7 +86,7 @@ int main(int argc, char** argv)
             u_long histNotmp = stoi(prevDumnLine.substr(0, 10));
             if (histNotmp == histNo)
             {
-                interactions.push_back(Event(prevDumnLine));
+                interactions.push_back(Event(prevDumnLine, 1));
             }
         }
         while (std::getline(fdumn, dumnLine))
@@ -98,6 +103,11 @@ int main(int argc, char** argv)
                 for (int i = 0; i < pulses.size(); i++)
                 {
                     Vector3D pos = getPos(interactions, pulses[i].first.cellNo);
+                    double timestamp = getTimeStamp(interactions, pulses[i].first.cellNo);
+                    std::stringstream ss;
+                    ss << std::fixed << std::setprecision(8) << std::setw(25) << timestamp;
+                    std::string timestampStr = ss.str();
+                    pulses[i].second.replace(14, 25, timestampStr);
                     outfile << pulses[i].second << "    "
                             << std::fixed << std::setprecision(2)
                             << std::setw(8) << pos.X // << "    "
@@ -108,7 +118,7 @@ int main(int argc, char** argv)
             }
             else
             {
-                interactions.push_back(Event(dumnLine));
+                interactions.push_back(Event(dumnLine, 1));
             }
         }
         if (fdumn.eof())
@@ -123,10 +133,10 @@ int main(int argc, char** argv)
         pulses.push_back(std::make_pair(std::move(newPulse), pulseLine));
         //go to next line
         counts++;
-        if (counts > maxN)
-        {
-            break;
-        }
+        // if (counts > maxN)
+        // {
+        //     break;
+        // }
     }
     
     fdumn.close();

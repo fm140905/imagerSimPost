@@ -16,3 +16,18 @@ Vector3D getPos(const std::vector<Event>& events, const int& cellNo)
     return pos;
     
 }
+
+double getTimeStamp(const std::vector<Event>& events, const int& cellNo)
+{
+    double timestamp;
+    double maxDpstErg(0);
+    for (int i = 0; i < events.size(); i++)
+    {
+        if (events[i].cellNo == cellNo && events[i].ergDpst > maxDpstErg)
+        {
+            maxDpstErg = events[i].ergDpst;
+            timestamp = events[i].timestamp;
+        }
+    }
+    return timestamp;
+}
