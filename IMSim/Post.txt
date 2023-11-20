@@ -1,0 +1,260 @@
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#  Input file for MPPost
+#
+version                2.1.9
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# GENERAL INFORMATION
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+title           TEST
+username        MLR
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# I/O FILE INFORMATION
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+polimi_det_in           comptonImager0.d    # MCNP-PoliMi detector filename
+import_pulses           no          # If processing pulse list (from measurements or simulation) turn to yes
+output_file             imager     # Desired output name
+label_output            no          # Place labels at the top of the output files
+separate_det_response   yes         # Print individual distributions for each detector
+list_of_pulses          yes          # Print a list mode file of all collected pulses
+incident_light          no          # Data written to list of pulses no = incident energy (MeV) 
+                                    #    yes = write the max potential LIGHT (MeVee) 
+event_inventory_on      no         # Print out a table summarizing all events in the file
+collision_history       no         # Print summary of how collisions make pulses in the detector
+time_file_on            no          # Use TIME file to obtain start times for each history
+time_file_name                      # Name of the TIME file
+overwrite_files         yes         # Allow the code to overwrite old files
+comma_delimited         no          # Output files delimited by a comma
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# MEMORY
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+division_size   3000    # MB, size of segments to divide the file
+cushion         300     # number of lines added to the arrays to prevent overstepping arrays
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# DETECTOR INFORMATION
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+time_dependent          yes             # Perform analysis by time instead of by history
+NPS                     1               # NPS used in the MCNP run
+detector_type           4 4 4 4 4 4 4 4 4 4 4 4 4 4 &
+                        4 4 4 4 4 4 4 4 4 4 4 4 4 4   # Type of Detector - list for each cell number
+                                        #   0 = Non Active Volume (i.e. PMT)
+                                        #   1 = Liquid Organic Scintillator
+                                        #   2 = He3 (Cannot be run with other types)
+                                        #   3 = Plastic Organic Scintillator
+                                        #   4 = NaI
+                                        #   5 = CaF2
+                                        #   6 = LaBr3 
+			# 7 = CLYC (Detector option for Capture Neutron Profile - See Below)
+threshold           0.0025 0.0025 0.0025 0.0025 0.0025 0.0025 0.0025 &
+                    0.0025 0.0025 0.0025 0.0025 0.0025 0.0025 0.0025 &
+                    0.0025 0.0025 0.0025 0.0025 0.0025 0.0025 0.0025 &
+                    0.0025 0.0025 0.0025 0.0025 0.0025 0.0025 0.0025 # MeVee, Threshold for event detection - list for each cell number
+upper_threshold     5.0 5.0 5.0 5.0 5.0 5.0 5.0 5.0 5.0 5.0 5.0 5.0 5.0 5.0 &
+                    5.0 5.0 5.0 5.0 5.0 5.0 5.0 5.0 5.0 5.0 5.0 5.0 5.0 5.0 # MeVee, the max acceptable light for event detection - list for each cell number
+detector_cell_numbers    30 32 34 36 38 40 42 70 72 74 76 78 80 82 &
+                         200 202 204 206 208 210 212 400 402 404 406 408 410 412 # Cell numbers of the detectors
+                           #   NOTE: To group cells add ( ) around the group. 
+                              #   There must be a space before and after each (
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Capture Neutron Profile ( Works in CLYC cells)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ncp_on				no					# yes/no, option to produce a phd based on the energy released in each capture (on automatically for clyc)
+ncp_low				0					# MeV, lower recorded neutron energy value
+ncp_high			5					# MeV, upper recorded neutron energy value
+ncp_incr			0.1					# MeV, bin width for recorded neutron energy values
+capture_material	3007,5010			# List zaid for materials relevent caputre events can occur in, up to 10
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# DETECTOR INFORMATION - Pulse Height 
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pulse_height_on     yes                 # Print pulse height distributions 
+sum_then_light      no                  # Convert the sum of all contributing particles energy to light
+cross_talk_on       no                  # Eliminate histories with cross talk
+
+# Pulse Generation Time - ns, Light collection time for a pulse
+organic_liq_pgt     10
+organic_pl_pgt      10
+nai_pgt             10
+caf2_pgt            10
+labr3_pgt           10
+clyc_pgt			10
+
+# Deadtime - ns, deadtime of the detector between pulses
+organic_liq_dt       0
+organic_pl_dt        0
+nai_dt               0
+caf2_dt              0
+labr3_dt             0
+clyc_dt			 0
+
+histogram_start     0                 # MeVee, Min value for the pulse height distribution
+histogram_stop      20.0                  # MeVee, Max value for the pulse height distribution
+bin_step            0.020                # MeVee, Bin step - top side of the bin
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ORGANIC SCINTILLATOR
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+calibration_regions  1                                  # Number of independently fit neutron light regions
+region_type         3                                  # Specify which form for the coefficients, if multiple regions list selections
+                                                        # Type    Form       How to enter values on the neutron_calibration line
+                                                        #   1 = Ax^2+Bx+C  -> E1 E2 A B C
+                                                        #   2 = Ax^2/(x+B) -> E1 E2 A B
+                                                        #   3 = A(Bx-C(1-exp(Dx^E)))  -> E1 E2 A B C D E
+                                                        #   Where E1 and E2 are the lower and upper energy bounds respectivly in MeVee
+neutron_calibration   0 50 1 0.65092 2.2071 -0.26612 1    # 3x3
+# neutron_calibration  0 50 1 0.81723 2.6290 -0.29686 1 # 3x3 Neutron Calibration - see above for entry instructions
+#                 0.8 1   0 0 0.03495 0.1424  -0.036 &  #   For multiple regions add an '&' to the end of the line and continue next region 
+#                 1   50  0 0 0.03495 0.1424  -0.036    #   on the next line
+photon_calibration      1.000  0.000                    # A,B: Parameters for photon light conversion - Ax+B
+carbon_light_constant   0.02                            # Constant value for carbon light conversion
+deuterium_fit_type      2                               # Specify which form for the coefficients for deuterium light conversion: 1 or 2   
+deuterium_calibration   1 2.568 82.72 -0.02968 1      # Enter coefficients for chosen deuterium fit type
+                                                        #   1 = Ax^4+Bx^3+Cx^2+Dx+E  -> A B C D E
+                                                        #   2 = A(Bx-C(1-exp(Dx^E))) -> A B C D E
+clyc_n_calib		.6465                           # Constant value for light conversion for capture events in CLYC   
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Energy Resolution
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+light_resolution_on       yes              # Turns on/off the a Gaussian Energy Broadening
+organic_liq_p_lgt   12.85 61.26 1268  # Coefficients A,B,C for Gaussian Broadening: A*LO+B*Sqrt(LO)+C
+organic_liq_n_lgt    12.85 61.26 1268  # 10.6092  11.2033 3923.0106
+organic_pl_p_lgt      10.083 311.77 431.58
+organic_pl_n_lgt      10.083 311.77 431.58
+nai_lgt                                 # For Inorganics leave blank to use defaults
+caf2_lgt                                # or specify Coefficients as 
+labr3_low_lgt                           # Coefficients A,B,C for Gaussian Broadening: A*LO+B*Sqrt(LO)+C
+labr3_high_lgt    
+clyc_lgt              3.6218  -79.1285  3092.1
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Time Resolution
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tme_resolution_on   yes                  # Turns on time broadening
+organic_liq_tme     1 
+organic_pl_tme      1
+nai_tme             10
+caf2_tme            24
+labr3_tme           1
+clyc_tme
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Voxels
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cell_voxels_on  no
+cells_to_voxel          111                  211                  311               # Cell numbers that are to be voxeled
+xVox           -3.81 7.62 3.81       -3.81 7.62 3.81          -20.955 13.97 20.955       # Start, step, max for voxelation
+yVox           -5.08  5.08  0.0     -18.4  7.62  -10.78      -29.89  7.62  -22.27       #   for multiple cells repeat start,step,stop 
+zVox           -3.81 7.62 3.81       -12.51 7.62 -4.89        -17.145 11.43 17.145       #   start1,step1,stop1,start2,step2,stop2
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# TIME-OF-FLIGHT, CORRELATION, and AUTOCORRELATION INFORMATION
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tof_on                  no      # yes/no, Turn on TOF distributions (cannot have a start detector)
+cross_correlation_on    no      # yes/no, Turn on cross correlation function
+auto_correlation_on     no      # yes/no, Turn on auto correlation function 
+start_detector          100     # Cell number of the start detector
+time_start              -100.5  # ns, time for the correlation plot to start (NOTE: there has to be a decimal point, even if it is just 100.0)
+time_stop               100.5   # ns, time for the correlation plot to stop (NOTE: there has to be a decimal point, even if it is just 100.0)
+time_increment          1       # ns, time increment between the bins - top side of the bin
+cc_window_incr          100    # ns, time window for correlation events for time dependent analysis
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Pulse Height Correlation
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pulse_correlation_on   no       # yes/no, turn on pulse height correlation analysis
+pc_min                 0        # MeVee, Minimum value for pulse height binning
+pc_max                 5        # MeVee, Maximum value for pulse height binning
+pc_incr                0.05     # MeVee, increment for pulse height binning
+stop_pulse_only        yes      # Ignore start detector pulse height
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# CAPTURE GATED DETECTORS
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+capture_gate_on     no          # Run the capture gated detector response
+cap_low             0           # ns, start time for binning the time to capture histogram
+cap_high            2000        # ns, stop time for binning the time to capture histogram
+cap_incr            10          # ns, bin size the time to capture histogram
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# IMAGING SYSTEM
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+imaging_system_on  no       # yes/no, turn on the imaging system
+longdistance       yes       # yes/no, turn on long distance
+window_front       5       # Time window used to discriminate double scatters in plane 1 for neutrons
+                            # (implemented before and after the trigger)
+window_start       5        # Start of time window used to correlate neutrons
+window_end         100      # Time window used to correlate neutrons
+window_gamma       50       # Time window used to correlate gammas
+                            # (implemented before and after the trigger)
+backprojection     yes      # yes/no, run back projection algorithm
+sphere_center      0 0 0    # X, Y, and Z coordinates of the center of the back projection sphere
+sphere_radius      100    # Radius of the back projection sphere
+sphere_mesh        2        # Degrees per mesh point
+cone_thickness     2        # Thickness of the back projection cones
+mlem_input_data    yes      # yes/no, outputs data to use with MLEM algorithm
+mlem_angle_bin     10       # Angle binning used for MLEM
+p_emin             0        # Min cutoff energy in MeVee for back projection imaging photons & MLEM
+p_ebin             1        # Energy Binning in MeVee for back projection imaging photons & MLEM
+p_emax             20        # Max cutoff energy in MeVee for back projection imaging photons & MLEM
+n_emin             0        # Min cutoff energy in MeVee for back projection imaging neutrons & MLEM
+n_ebin             1        # Energy Binning in MeVee for back projection imaging neutrons & MLEM
+n_emax             20        # Max cutoff energy in MeVee for back projection imaging neutrons & MLEM
+uncertaintythickness no	    # yes/no
+distancecheck        no     # yes/no
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# He3 MODULE
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+he3_multiplicity     no     # yes/no: Turn on the He3 module
+number_of_windows    256    # Number of windows to evaluate
+window_increment     16     # Window increment in microseconds
+deadtime_type        1      # Control which model is applied for dead time
+                            #   1 = Type I, applied to each tube only
+                            #   2 = Type II, applied to each tube then fed into an amplifier
+                            #   3 = Type III, AWCC style, detector, into amp, into OP amp
+detector_deadtime    4      # Detector dead time in microseconds
+amplifier_deadtime   0.5    # Level I amplifier dead time in microseconds
+amp_2_deadtime       0.03   # Level II amplifier dead time in microseconds
+max_multiplicity     500    # Maximum multiplicity expected (for array size handling)
+trigger_type         1      # Control how the multiplicity windows are triggered
+                            #   1 = Constant window
+                            #   2 = Open on trigger (Reverse)
+                            #   3 = Open on trigger (Forward)
+pre_delay            4.5    # Predelay after event trigger in microseconds
+long_delay           1024   # Delay between R+A window and A window in microseconds
+run_time             105.33 # Time the source is distributed over in seconds
+output_style         3      # Controls what data is printed to a file
+                            #   1 = All multiplicity distributions + Feynman-Y + S,D,T
+                            #   2 = Last multiplicity distribution + S,D,T rates
+                            #   3 = Last multiplicity distribution + Mean, Variance, Feynman-Y
+generation_analysis_on yes  # yes/no, analysis of the neutron generations captured
+paralyzable         no      # yes/no, yes treats He-3 detectors as paralyzable, no treated as non-paralyzable
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Select Capture Event Type
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+output_sort_file    no      # Print out a file with all sorted events
+sort_ipt            1       # Particle type to sort by, set -1 to ignore
+sort_nxs            2003    # Material of interaction to sort by, set to -1 to ignore
+sort_ntyn           0       # Interaction type to sort by, set to -1 to ignore
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Scintillator Multiplicity MODULE
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+scint_mult          no      # Turn on Scintillator Multiplicity
+neutrons_only       no      # Only process neutron multiplicities (i.e. np -> n and nnppp -> nn)
+digitizer_window    480     # ns, Length of the digitizer window
+digitizer_gap       16      # ns, Delay between successive digitizer windows
+digitizer_end       220     # ns, Time at end of digitizer window where pulses are not seen
+digitizer_lag       80      # ns, Time at the beginning of digitizer window before a pulse can be seen
+sm_dist_on          yes     # yes/no, Pulse height distributions for each multiplicity combination
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Variance Reduction
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+apply_weight        no     # yes/no, use the non-unity weights of particles

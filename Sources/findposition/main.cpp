@@ -13,7 +13,8 @@ int main(int argc, char** argv)
 {
     std::string dir = argv[1];
     ulong maxN = 100000000;
-    std::string dumnFile("/comptonImager0.d");
+    std::string dumnFile = argv[2];
+    dumnFile = "/" + dumnFile;
     std::string pulseFile("/pulses_sort_by_hist.txt");
     std::string outpath("/pulses_with_pos.txt");
     // std::string pulseFile("/imager_All_pulses.o");
