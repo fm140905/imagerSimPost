@@ -1,3 +1,10 @@
+<!--
+ * @Description: 
+ * @Author: Ming Fang
+ * @Date: 2023-11-20 11:38:44
+ * @LastEditors: Ming Fang
+ * @LastEditTime: 2023-11-20 12:14:16
+-->
 # Postprocess MCNPX-PoliMi Output to Get the Cones for Back-projection
 1. Run `MPPost` to process the collision file to get the pulses.
 2. Sort pulses by history number.
@@ -11,6 +18,8 @@
 
 ## Compile
 ```bash
+  git clone https://github.com/fm140905/imagerSimPost.git
+  cd imagerSimPost
   mkdir build
   cd build
   cmake ..
@@ -18,10 +27,20 @@
 ```
 
 ## Execute
+
+### Linux
 - Copy `run.sh` under `IMSim` directory to your simulation folder where the collision file (`*.d`) and pulses file (`*_All_pulses.o`) are located. 
 - Change `sim_dir` to your simulation folder, `exe_dir` to the path to your build directory
 - Open the terminal and run
 ```bash
 chmod +x ./run.sh
 ./run.sh
+```
+
+### Windows
+- Copy `run.bat` under `IMSim` directory to your simulation folder where the collision file (`*.d`) and pulses file (`*_All_pulses.o`) are located. 
+- Change `sim_dir` to your simulation folder, `exe_dir` to the path to your build directory
+- Open the terminal and run
+```bash
+run.bat
 ```
