@@ -5,6 +5,8 @@
 #include <vector>
 #include <cmath>
 
+typedef unsigned long ulong;
+
 class Vector3D
 {
 public:
