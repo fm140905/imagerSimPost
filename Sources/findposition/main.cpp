@@ -57,7 +57,7 @@ int main(int argc, char** argv)
     std::string prevDumnLine("");
     // pulses with same history number
     std::vector<std::pair<Pulse, std::string>> pulses;
-    u_long histNo(0); 
+    ulong histNo(0); 
     int counts(0);
     while (std::getline(fpulse, pulseLine))
     {
@@ -84,7 +84,7 @@ int main(int argc, char** argv)
         std::vector<Event> interactions;
         if (prevDumnLine.length() > 0)
         {
-            u_long histNotmp = stoi(prevDumnLine.substr(0, 10));
+            ulong histNotmp = stoi(prevDumnLine.substr(0, 10));
             if (histNotmp == histNo)
             {
                 interactions.push_back(Event(prevDumnLine, 1));
@@ -92,7 +92,7 @@ int main(int argc, char** argv)
         }
         while (std::getline(fdumn, dumnLine))
         {
-            u_long histNotmp = stoi(dumnLine.substr(0, 10));
+            ulong histNotmp = stoi(dumnLine.substr(0, 10));
             if (histNotmp < histNo)
                 continue;                    
             else if (histNotmp > histNo)
